@@ -72,7 +72,9 @@ public struct __Stack<S: ~Copyable>: ~Copyable {
     /// Wraps an existing column.
     @inlinable
     public init(column: consuming S) { self.column = column }
+}
 
+extension __Stack {
     /// Consumes the stack, yielding its storage column.
     @inlinable
     public consuming func take() -> S { column }

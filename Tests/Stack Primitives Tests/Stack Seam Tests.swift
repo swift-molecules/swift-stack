@@ -30,19 +30,18 @@ import Testing
 // its own suite — the type system cannot express the contract the seam-generic pop/top
 // machinery relies on. Both front-door columns are proven here.
 
-private typealias StackColumn<E: ~Copyable> =
-    Buffer<Storage<Memory.Allocator<Memory.Heap>>.Contiguous<E>>.Linear
-
-private typealias StackBoundedColumn<E: ~Copyable> =
-    Buffer<Storage<Memory.Allocator<Memory.Heap>>.Contiguous<E>>.Linear.Bounded
-
 @Suite
 struct `Stack Seam Tests` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
 
+extension `Stack Seam Tests`.Integration {
     @Test
     func `[DS-024] Seam.Ledger laws hold for the canonical Stack column`() {
         let violations = Seam.Ledger.violations(
-            makeEmpty: { StackColumn<Int>(minimumCapacity: Index<Int>.Count(4)) },
+            makeEmpty: { Buffer<Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Int>>.Linear(minimumCapacity: Index<Int>.Count(4)) },
             element: { $0 }
         )
         #expect(violations.isEmpty, "\(violations)")
@@ -51,7 +50,7 @@ struct `Stack Seam Tests` {
     @Test
     func `[DS-024] Seam.Ledger laws hold for the Stack.Bounded column`() {
         let violations = Seam.Ledger.violations(
-            makeEmpty: { StackBoundedColumn<Int>(minimumCapacity: Index<Int>.Count(64)) },
+            makeEmpty: { Buffer<Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Int>>.Linear.Bounded(minimumCapacity: Index<Int>.Count(64)) },
             element: { $0 }
         )
         #expect(violations.isEmpty, "\(violations)")

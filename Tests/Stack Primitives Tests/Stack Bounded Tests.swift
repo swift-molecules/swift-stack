@@ -23,7 +23,12 @@ import Testing
 
 @Suite
 struct `Stack.Bounded Tests` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
 
+extension `Stack.Bounded Tests`.Unit {
     @Test
     func `push up to capacity, then push throws Error.full (rejected element destroyed)`() throws {
         var s = Stack<Int>.Bounded(capacity: Index<Int>.Count(3))

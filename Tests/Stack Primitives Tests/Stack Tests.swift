@@ -33,7 +33,12 @@ private struct Token: ~Copyable {
 
 @Suite
 struct `Stack Tests` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+}
 
+extension `Stack Tests`.Unit {
     @Test
     func `empty stack reports isEmpty and count 0`() {
         let s = Stack<Int>()
@@ -116,7 +121,7 @@ struct `Stack Tests` {
     @Test
     func `growth past the initial capacity preserves LIFO order`() {
         var s = Stack<Int>(minimumCapacity: Index<Int>.Count(2))
-        for value in 1...64 { s.push(value) }
+        (1...64).forEach { s.push($0) }
         let count = s.count
         #expect(count == Index<Int>.Count(64))
         var expected = 64
