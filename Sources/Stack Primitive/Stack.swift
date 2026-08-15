@@ -117,7 +117,6 @@ extension __Stack where S: ~Copyable, S: Store.`Protocol` & Buffer.`Protocol` {
         // (verified: no such API on the typed count) — escalating per [INFRA-025]
         // rather than inventing one ad hoc. Same shape pre-exists unshielded in
         // swift-heap-primitives Heap.swift:205 (the pilot this file mirrors).
-        // swiftlint:disable:next cardinal_count_minus_one_evasion
         _read { yield column[slot(Int(clamping: count) - 1)] }
     }
 
