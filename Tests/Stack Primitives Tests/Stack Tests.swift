@@ -1,35 +1,12 @@
-// ===----------------------------------------------------------------------===//
-//
-// This source file is part of the swift-primitives open source project
-//
-// Copyright (c) 2024-2026 Coen ten Thije Boonkkamp and the swift-primitives project authors
-// Licensed under Apache License v2.0
-//
-// See LICENSE for license information
-//
-// ===----------------------------------------------------------------------===//
-
 import Index_Primitives
 import Testing
 
 @testable import Stack_Primitives
 
-// MARK: - Fixtures
-
-/// A move-only element with no ordering requirement — the LIFO discipline is
-/// order-free, so `Stack` carries `~Copyable` elements through push/pop/top with
-/// no `Comparison.Protocol` bound (unlike `Heap`).
 private struct Token: ~Copyable {
     let id: Int
     init(_ id: Int) { self.id = id }
 }
-
-// MARK: - Stack (LIFO — the ADT-tower W2 shape)
-//
-// The canonical `Stack<E>` rides the DIRECT heap column, so it is MOVE-ONLY for
-// every element (Copyable or not). Observations are bound to locals before
-// `#expect` — the property-access `#expect` form would otherwise require the
-// move-only value to copy.
 
 @Suite
 struct `Stack Tests` {
@@ -62,7 +39,7 @@ extension `Stack Tests`.Unit {
         var drained: [Int] = []
         while let next = s.pop() { drained.append(next) }
         let empty = s.isEmpty
-        let overDrain = s.pop()  // pop on empty -> nil (the convention)
+        let overDrain = s.pop()
         #expect(drained == [7, 25, 3, 42])
         #expect(empty)
         #expect(overDrain == nil)
@@ -82,7 +59,7 @@ extension `Stack Tests`.Unit {
         #expect(t2 == 8)
         let popped = s.pop()
         let t3 = s.top
-        #expect(popped == 8)  // Int? == Int-literal (Optional promotion)
+        #expect(popped == 8)
         #expect(t3 == 4)
     }
 
@@ -110,7 +87,7 @@ extension `Stack Tests`.Unit {
         s.push(Token(3))
         let peeked = s.top.id
         #expect(peeked == 3)
-        // Consuming-unwrap the `~Copyable` Token? each pop (no borrow of Element?).
+
         var ids: [Int] = []
         while let token = s.pop() { ids.append(token.id) }
         let empty = s.isEmpty

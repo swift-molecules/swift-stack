@@ -1,25 +1,7 @@
-// ===----------------------------------------------------------------------===//
-//
-// This source file is part of the swift-primitives open source project
-//
-// Copyright (c) 2024-2026 Coen ten Thije Boonkkamp and the swift-primitives project authors
-// Licensed under Apache License v2.0
-//
-// See LICENSE for license information
-//
-// ===----------------------------------------------------------------------===//
-
 import Index_Primitives
 import Testing
 
 @testable import Stack_Primitives
-
-// MARK: - Stack<E>.Bounded (fixed-capacity — the capacity-twin front door)
-//
-// The observation/removal ops (count, isEmpty, top, pop) ride the SHARED seam surface
-// (Stack.swift), so they work over the bounded column with no per-column code; only
-// push/init pin per column. Push on the bounded column throws `Error.full` (the decreed
-// `throws(Overflow)` op form, M10 per-family error).
 
 @Suite
 struct `Stack.Bounded Tests` {
@@ -40,16 +22,12 @@ extension `Stack.Bounded Tests`.Unit {
         #expect(count == Index<Int>.Count(3))
         #expect(t == 3)
 
-        // Overflow: the fourth push throws `.full` and leaves the stack unchanged.
-        // The per-family error is nested on the carrier, so it is spelled through the
-        // BOUNDED instantiation (`Stack<Int>.Bounded.Error`, matching the landed
-        // `Queue<E>.Bounded.Error`) — the typed-throws error `s.push` raises.
         var caught: Stack<Int>.Bounded.Error?
         do throws(Stack<Int>.Bounded.Error) {
             try s.push(4)
             Issue.record("expected Stack.Error.full on overflow")
         } catch {
-            caught = error  // typed-throws: `error` is `Stack<Int>.Bounded.Error`
+            caught = error
         }
         let countAfter = s.count
         let topAfter = s.top

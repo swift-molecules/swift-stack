@@ -12,21 +12,15 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-        // MARK: - Base (ADT-tower W2 shape: carrier `__Stack<S>` + front doors
-        //          `Stack<E>` (canonical) and `Stack<E>.Bounded` (capacity twin))
+
         .library(name: "Stack Primitive", targets: ["Stack Primitive"]),
         .library(name: "Stack Primitives", targets: ["Stack Primitives"]),
 
-        // MARK: - Test Support
         .library(name: "Stack Primitives Test Support", targets: ["Stack Primitives Test Support"]),
 
-        // NOTE (ADT-tower W2, 2026-07-02): the hand-written `Stack.Bounded` TYPE
-        // targets (`Stack Bounded Primitive` / `Stack Bounded Primitives`) are
-        // DELETED. `.Bounded` is now the capacity-twin front-door alias on the
-        // carrier (Stack.Bounded.swift; the 2026-06-23 directive, §9.6.4).
     ],
     dependencies: [
-        // Carrier + front doors (Stack Primitive):
+
         .package(
             url: "https://github.com/swift-primitives/swift-index-primitives.git",
             branch: "main"
@@ -51,7 +45,7 @@ let package = Package(
             url: "https://github.com/swift-primitives/swift-memory-heap-primitives.git",
             branch: "main"
         ),
-        // Test support:
+
         .package(
             url: "https://github.com/swift-primitives/swift-collection-primitives.git",
             branch: "main"
@@ -67,15 +61,13 @@ let package = Package(
     ],
     targets: [
 
-        // MARK: - Carrier + front doors (the ADT-tower W2 core)
         .target(
             name: "Stack Primitive",
             dependencies: [
-                // Seams (D3): the generic mutate + observability surfaces the ops ride.
+
                 .product(name: "Store Protocol Primitives", package: "swift-storage-primitives"),
                 .product(name: "Buffer Protocol Primitives", package: "swift-buffer-primitives"),
-                // Column vocabulary: the default direct heap-allocated linear column
-                // + its bounded capacity twin (the `.Bounded` front door).
+
                 .product(name: "Buffer Primitive", package: "swift-buffer-primitives"),
                 .product(
                     name: "Buffer Linear Primitive",
@@ -91,7 +83,7 @@ let package = Package(
                     package: "swift-storage-primitives"
                 ),
                 .product(name: "Memory Heap Primitives", package: "swift-memory-heap-primitives"),
-                // Allocation-generic growth pin ([DS-029] form-2: `Resource: Memory.Growable`).
+
                 .product(
                     name: "Memory Allocator Primitive",
                     package: "swift-memory-allocation-primitives"
@@ -100,12 +92,11 @@ let package = Package(
                     name: "Memory Allocator Protocol Primitives",
                     package: "swift-memory-allocation-primitives"
                 ),
-                // Typed slots.
+
                 .product(name: "Index Primitives", package: "swift-index-primitives"),
             ]
         ),
 
-        // MARK: - Umbrella ([MOD-005]): re-exports the carrier module.
         .target(
             name: "Stack Primitives",
             dependencies: [
@@ -113,7 +104,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Tests
         .testTarget(
             name: "Stack Primitives Tests",
             dependencies: [
@@ -123,7 +113,6 @@ let package = Package(
             ]
         ),
 
-        // MARK: - Test Support
         .target(
             name: "Stack Primitives Test Support",
             dependencies: [
