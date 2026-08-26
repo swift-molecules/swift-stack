@@ -1,12 +1,12 @@
 public import Buffer_Linear_Primitive
 public import Buffer_Primitive
-public import Buffer_Protocol_Primitives
-public import Index_Primitives
+public import Buffer_Protocol
+public import Index
 public import Memory_Allocator_Primitive
-public import Memory_Allocator_Protocol_Primitives
-public import Storage_Contiguous_Primitives
+public import Memory_Allocator_Protocol
+public import Storage_Contiguous
 public import Storage_Primitive
-public import Store_Protocol_Primitives
+public import Store_Protocol
 
 @_documentation(visibility: public)
 @frozen

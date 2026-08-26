@@ -1,6 +1,6 @@
 import Testing
 
-@testable import Stack_Primitives
+@testable import Stack
 
 private struct SplitMix64: RandomNumberGenerator {
     var state: UInt64

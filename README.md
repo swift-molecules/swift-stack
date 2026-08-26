@@ -1,7 +1,7 @@
-# Stack Primitives
+# Stack
 
 ![Development Status](https://img.shields.io/badge/status-active--development-blue.svg)
-[![CI](https://github.com/swift-primitives/swift-stack-primitives/actions/workflows/ci.yml/badge.svg)](https://github.com/swift-primitives/swift-stack-primitives/actions/workflows/ci.yml)
+[![CI](https://github.com/swift-molecules/swift-stack/actions/workflows/ci.yml/badge.svg)](https://github.com/swift-molecules/swift-stack/actions/workflows/ci.yml)
 
 `Stack<Element>` — a dynamically-growing LIFO stack for any element type, including move-only (`~Copyable`) ones. Push and pop are amortized O(1); peek borrows the top element without removing it. It is the canonical stack — reach for it unless a constraint demands a fixed-capacity variant.
 
@@ -21,7 +21,7 @@ For workloads that must not allocate during use, `Stack.Bounded` is a fixed-capa
 ## Quick Start
 
 ```swift
-import Stack_Primitives
+import Stack
 
 var stack = Stack<Int>()
 stack.push(1)
@@ -38,7 +38,7 @@ Add the dependency to your `Package.swift`:
 
 ```swift
 dependencies: [
-    .package(url: "https://github.com/swift-primitives/swift-stack-primitives.git", branch: "main")
+    .package(url: "https://github.com/swift-molecules/swift-stack.git", branch: "main")
 ]
 ```
 
@@ -48,7 +48,7 @@ Add a product to your target:
 .target(
     name: "App",
     dependencies: [
-        .product(name: "Stack Primitives", package: "swift-stack-primitives")
+        .product(name: "Stack", package: "swift-stack")
     ]
 )
 ```
@@ -61,9 +61,9 @@ The package is pre-1.0 — depend on `branch: "main"` until `0.1.0` is tagged. R
 
 | Product | Contents | When to import |
 |---------|----------|----------------|
-| `Stack Primitives` | Umbrella — `Stack` and `Stack.Bounded` with their conformances | Most consumers |
+| `Stack` | Umbrella — `Stack` and `Stack.Bounded` with their conformances | Most consumers |
 | `Stack Primitive` | `Stack<Element>` — the growable LIFO stack | Naming the growable stack directly |
-| `Stack Bounded Primitive` / `Stack Bounded Primitives` | `Stack.Bounded` — the fixed-capacity stack and its conformances | Allocation-free, fixed-capacity use |
+| `Stack Bounded Primitive` / `Stack Bounded` | `Stack.Bounded` — the fixed-capacity stack and its conformances | Allocation-free, fixed-capacity use |
 
 ---
 
@@ -81,9 +81,9 @@ The package is pre-1.0 — depend on `branch: "main"` until `0.1.0` is tagged. R
 
 ## Related Packages
 
-- [`swift-array-primitives`](https://github.com/swift-primitives/swift-array-primitives) — the sequential-container sibling for random-access storage.
-- [`swift-collection-primitives`](https://github.com/swift-primitives/swift-collection-primitives) — the `Collection` capability the stack conforms to.
-- [`swift-column-primitives`](https://github.com/swift-primitives/swift-column-primitives) — the storage columns the stack is built over.
+- [`swift-array`](https://github.com/swift-molecules/swift-array) — the sequential-container sibling for random-access storage.
+- [`swift-collection`](https://github.com/swift-molecules/swift-collection) — the `Collection` capability the stack conforms to.
+- [`swift-column`](https://github.com/swift-molecules/swift-column) — the storage columns the stack is built over.
 
 ---
 

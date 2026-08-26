@@ -2,7 +2,7 @@
 # Triaged by AI-assisted bulk pass (2026-04-29).
 description: "Stack — a dynamically-growing LIFO stack for move-only and copyable elements (O(1) amortized push/pop), with a fixed-capacity Stack.Bounded variant."
 topics:
-  - primitives
+  - molecules
   - stack
 homepage: "https://swift-institute.org"
 readme:

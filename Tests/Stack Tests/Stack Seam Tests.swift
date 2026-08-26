@@ -1,12 +1,12 @@
 import Buffer_Linear_Bounded_Primitive
 import Buffer_Linear_Primitive
 import Buffer_Primitive
-import Buffer_Primitives_Test_Support
-import Index_Primitives
+import Buffer_Test_Support
+import Index
 import Memory_Allocator_Primitive
-import Memory_Heap_Primitives
-import Stack_Primitives
-import Storage_Contiguous_Primitives
+import Memory_Heap
+import Stack
+import Storage_Contiguous
 import Storage_Primitive
 import Testing
 

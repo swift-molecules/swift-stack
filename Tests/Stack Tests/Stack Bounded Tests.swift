@@ -1,7 +1,7 @@
-import Index_Primitives
+import Index
 import Testing
 
-@testable import Stack_Primitives
+@testable import Stack
 
 @Suite
 struct `Stack.Bounded Tests` {
