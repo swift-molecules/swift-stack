@@ -12,15 +12,20 @@ let package = Package(
         .visionOS(.v27),
     ],
     products: [
-
-        .library(name: "Stack Primitive", targets: ["Stack Primitive"]),
-        .library(name: "Stack", targets: ["Stack"]),
-
-        .library(name: "Stack Test Support", targets: ["Stack Test Support"]),
-
+        .library(
+            name: "Stack",
+            targets: ["Stack"]
+        ),
+        .library(
+            name: "Stack Standard Library Integration",
+            targets: ["Stack Standard Library Integration"]
+        ),
+        .library(
+            name: "Stack Apple Foundation Integration",
+            targets: ["Stack Apple Foundation Integration"]
+        ),
     ],
     dependencies: [
-
         .package(
             url: "https://github.com/swift-molecules/swift-index.git",
             branch: "main"
@@ -45,29 +50,13 @@ let package = Package(
             url: "https://github.com/swift-molecules/swift-memory-heap.git",
             branch: "main"
         ),
-
-        .package(
-            url: "https://github.com/swift-molecules/swift-collection.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-molecules/swift-input.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-molecules/swift-sequence.git",
-            branch: "main"
-        ),
     ],
     targets: [
-
         .target(
-            name: "Stack Primitive",
+            name: "Stack",
             dependencies: [
-
                 .product(name: "Store Protocol", package: "swift-storage"),
                 .product(name: "Buffer Protocol", package: "swift-buffer"),
-
                 .product(name: "Buffer Primitive", package: "swift-buffer"),
                 .product(
                     name: "Buffer Linear Primitive",
@@ -83,7 +72,6 @@ let package = Package(
                     package: "swift-storage"
                 ),
                 .product(name: "Memory Heap", package: "swift-memory-heap"),
-
                 .product(
                     name: "Memory Allocator Primitive",
                     package: "swift-memory-allocation"
@@ -92,47 +80,23 @@ let package = Package(
                     name: "Memory Allocator Protocol",
                     package: "swift-memory-allocation"
                 ),
-
                 .product(name: "Index", package: "swift-index"),
             ]
         ),
-
         .target(
-            name: "Stack",
+            name: "Stack Standard Library Integration",
+            dependencies: ["Stack"]
+        ),
+        .target(
+            name: "Stack Apple Foundation Integration",
             dependencies: [
-                "Stack Primitive"
+                "Stack",
+                "Stack Standard Library Integration",
             ]
         ),
-
         .testTarget(
             name: "Stack Tests",
-            dependencies: [
-                "Stack",
-                "Stack Test Support",
-                .product(name: "Index Test Support", package: "swift-index"),
-            ]
-        ),
-
-        .target(
-            name: "Stack Test Support",
-            dependencies: [
-                "Stack",
-                .product(
-                    name: "Buffer Test Support",
-                    package: "swift-buffer"
-                ),
-                .product(name: "Index Test Support", package: "swift-index"),
-                .product(
-                    name: "Collection Test Support",
-                    package: "swift-collection"
-                ),
-                .product(name: "Input Test Support", package: "swift-input"),
-                .product(
-                    name: "Sequence Test Support",
-                    package: "swift-sequence"
-                ),
-            ],
-            path: "Tests/Support"
+            dependencies: ["Stack"]
         ),
     ],
     swiftLanguageModes: [.v6]
