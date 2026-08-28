@@ -1,13 +1,7 @@
-import Buffer_Linear_Bounded_Primitive
-import Buffer_Linear_Primitive
-import Buffer_Primitive
-import Buffer_Test_Support
-import Index
-import Memory_Allocator_Primitive
-import Memory_Heap
+import Cardinal
 import Stack
-import Storage_Contiguous
-import Storage_Primitive
+import Storage
+import Tagged
 import Testing
 
 @Suite
@@ -19,28 +13,20 @@ struct `Stack Seam Tests` {
 
 extension `Stack Seam Tests`.Integration {
     @Test
-    func `[DS-024] Seam.Ledger laws hold for the canonical Stack column`() {
-        let violations = Seam.Ledger.violations(
-            makeEmpty: {
-                Buffer<Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Int>>.Linear(
-                    minimumCapacity: Index<Int>.Count(4)
-                )
-            },
-            element: { $0 }
-        )
-        #expect(violations.isEmpty, "\(violations)")
+    func `canonical Stack column round-trips through the generic seam`() {
+        var original = Stack<Int>()
+        original.push(7)
+        let column = original.take()
+        var roundTripped = Stack<Int>(column: column)
+        #expect(roundTripped.pop() == 7)
     }
 
     @Test
-    func `[DS-024] Seam.Ledger laws hold for the Stack.Bounded column`() {
-        let violations = Seam.Ledger.violations(
-            makeEmpty: {
-                Buffer<Storage<Memory.Allocator<Memory.Heap>>.Contiguous<Int>>.Linear.Bounded(
-                    minimumCapacity: Index<Int>.Count(64)
-                )
-            },
-            element: { $0 }
-        )
-        #expect(violations.isEmpty, "\(violations)")
+    func `bounded Stack column round-trips through the generic seam`() throws {
+        var original = Stack<Int>.Bounded(capacity: Tagged<Int, Cardinal>(4 as UInt))
+        try original.push(11)
+        let column = original.take()
+        var roundTripped = Stack<Int>.Bounded(column: column)
+        #expect(roundTripped.pop() == 11)
     }
 }

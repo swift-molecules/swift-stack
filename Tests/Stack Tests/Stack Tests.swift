@@ -1,7 +1,8 @@
-import Index
+import Cardinal
+import Stack
+import Storage
+import Tagged
 import Testing
-
-@testable import Stack
 
 private struct Token: ~Copyable {
     let id: Int
@@ -22,7 +23,7 @@ extension `Stack Tests`.Unit {
         let empty = s.isEmpty
         let count = s.count
         #expect(empty)
-        #expect(count == Index<Int>.Count(0))
+        #expect(count == Tagged<Int, Cardinal>(0 as UInt))
     }
 
     @Test
@@ -33,7 +34,7 @@ extension `Stack Tests`.Unit {
         let count = s.count
         let t = s.top
         #expect(nonEmpty)
-        #expect(count == Index<Int>.Count(4))
+        #expect(count == Tagged<Int, Cardinal>(4 as UInt))
         #expect(t == 7)
 
         var drained: [Int] = []
@@ -69,7 +70,7 @@ extension `Stack Tests`.Unit {
         s.push(17)
         let count = s.count
         let t = s.top
-        #expect(count == Index<Int>.Count(1))
+        #expect(count == Tagged<Int, Cardinal>(1 as UInt))
         #expect(t == 17)
         let popped = s.pop()
         let empty = s.isEmpty
@@ -97,10 +98,10 @@ extension `Stack Tests`.Unit {
 
     @Test
     func `growth past the initial capacity preserves LIFO order`() {
-        var s = Stack<Int>(minimumCapacity: Index<Int>.Count(2))
+        var s = Stack<Int>(minimumCapacity: Tagged<Int, Cardinal>(2 as UInt))
         (1...64).forEach { s.push($0) }
         let count = s.count
-        #expect(count == Index<Int>.Count(64))
+        #expect(count == Tagged<Int, Cardinal>(64 as UInt))
         var expected = 64
         while let next = s.pop() {
             #expect(next == expected)
