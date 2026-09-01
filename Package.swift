@@ -76,7 +76,7 @@ let package = Package(
                 ),
                 .product(name: "Memory Small", package: "swift-memory-small"),
                 .product(
-                    name: "Memory Allocator Primitive",
+                    name: "Memory Allocator",
                     package: "swift-memory-allocation"
                 ),
                 .product(
