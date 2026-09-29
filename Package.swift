@@ -48,16 +48,10 @@ let package = Package(
         ),
         .package(
             url: "https://github.com/swift-atoms/swift-storage.git",
-            branch: "main"
-        ),
+            branch: "main", traits: ["Memory"]),
         .package(
             url: "https://github.com/swift-molecules/swift-memory-allocation.git",
-            branch: "main"
-        ),
-        .package(
-            url: "https://github.com/swift-molecules/swift-memory-small.git",
-            branch: "main"
-        ),
+            branch: "main", traits: ["MemorySmall"]),
     ],
     targets: [
         .target(
@@ -74,7 +68,6 @@ let package = Package(
                     name: "Buffer Linear Bounded Primitive",
                     package: "swift-buffer-linear"
                 ),
-                .product(name: "Memory Small", package: "swift-memory-small"),
                 .product(
                     name: "Memory Allocator",
                     package: "swift-memory-allocation"
@@ -85,6 +78,7 @@ let package = Package(
                 ),
                 .product(name: "Index", package: "swift-index"),
                 .product(name: "Tagged", package: "swift-tagged"),
+                .product(name: "Memory Small", package: "swift-memory-allocation"),
             ]
         ),
         .target(
