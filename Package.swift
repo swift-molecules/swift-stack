@@ -35,6 +35,10 @@ let package = Package(
             branch: "main"
         ),
         .package(
+            url: "https://github.com/swift-atoms/swift-ordinal.git",
+            branch: "main"
+        ),
+        .package(
             url: "https://github.com/swift-atoms/swift-tagged.git",
             branch: "main"
         ),
@@ -77,6 +81,7 @@ let package = Package(
                     package: "swift-memory-allocation"
                 ),
                 .product(name: "Index", package: "swift-index"),
+                .product(name: "Ordinal", package: "swift-ordinal"),
                 .product(name: "Tagged", package: "swift-tagged"),
                 .product(name: "Memory Small", package: "swift-memory-allocation"),
             ]

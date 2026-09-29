@@ -5,6 +5,7 @@ public import Cardinal
 public import Index
 public import Memory_Allocator
 public import Memory_Allocator_Protocol
+public import Ordinal
 public import Storage
 public import Tagged
 
@@ -52,7 +53,7 @@ extension __Stack where S: ~Copyable, S: __StackColumnProtocol {
 
     @inlinable
     package func slot(_ k: Int) -> Index<S.Element> {
-        Index(UInt(k))
+        Index(Ordinal(UInt(k)))
     }
 
     @inlinable
