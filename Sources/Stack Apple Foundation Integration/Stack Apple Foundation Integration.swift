@@ -1,3 +1,3 @@
-public import Stack
-public import Stack_Standard_Library_Integration
-public import Foundation
+internal import Stack
+internal import Stack_Standard_Library_Integration
+internal import Foundation

@@ -1,1 +1,1 @@
-public import Stack
+internal import Stack
