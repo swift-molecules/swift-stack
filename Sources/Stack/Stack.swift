@@ -1,6 +1,6 @@
+public import Buffer
 public import Buffer_Linear_Bounded_Primitive
 public import Buffer_Linear_Primitive
-public import Buffer
 public import Cardinal
 public import Index
 public import Memory_Allocator
