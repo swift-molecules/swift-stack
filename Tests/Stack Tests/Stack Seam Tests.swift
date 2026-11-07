@@ -4,16 +4,14 @@ import Storage
 import Tagged
 import Testing
 
-extension `Stack Seam Tests`.`Stack Seam Tests` {
-    @Suite
-    struct `Stack Seam Tests` {
-        @Suite struct Unit {}
-        @Suite struct `Edge Case` {}
-        @Suite struct Integration {}
-    }
+@Suite
+struct `Stack Seam Tests` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
 }
 
-extension `Stack Seam Tests`.`Stack Seam Tests`.Integration {
+extension `Stack Seam Tests`.Integration {
     @Test
     func `canonical Stack column round-trips through the generic seam`() {
         var original = Stack<Int>()

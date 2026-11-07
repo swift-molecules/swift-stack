@@ -16,16 +16,14 @@ extension SplitMix64 {
     }
 }
 
-extension `Stack Differential Tests`.`Stack Differential Tests` {
-    @Suite
-    struct `Stack Differential Tests` {
-        @Suite struct Unit {}
-        @Suite struct `Edge Case` {}
-        @Suite struct Integration {}
-    }
+@Suite
+struct `Stack Differential Tests` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
 }
 
-extension `Stack Differential Tests`.`Stack Differential Tests`.Integration {
+extension `Stack Differential Tests`.Integration {
     @Test
     func `600 mixed ops: duplicates, interleaved push/pop, growth across reallocations`() {
         var rng = SplitMix64(seed: 0x5EED_1234_ABCD_0001)
