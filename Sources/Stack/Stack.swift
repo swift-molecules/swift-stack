@@ -23,16 +23,6 @@ where S: Store.`Protocol`, S: ~Copyable {}
 extension Buffer.Linear.Bounded: __StackColumnProtocol
 where S: Store.`Protocol`, S: ~Copyable {}
 
-@_documentation(visibility: public)
-@frozen
-public struct __Stack<S: ~Copyable>: ~Copyable {
-
-    @usableFromInline
-    package var column: S
-
-    @inlinable
-    public init(column: consuming S) { self.column = column }
-}
 
 extension __Stack where S: ~Copyable {
 
