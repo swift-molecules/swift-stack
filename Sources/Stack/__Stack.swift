@@ -1,13 +1,13 @@
-public import Buffer
+import Buffer
 public import Buffer_Linear_Bounded_Primitive
-public import Buffer_Linear_Primitive
-public import Cardinal
-public import Index
-public import Memory_Allocator
-public import Memory_Allocator_Protocol
-public import Ordinal
-public import Storage
-public import Tagged
+import Buffer_Linear_Primitive
+import Cardinal
+import Index
+import Memory_Allocator
+import Memory_Allocator_Protocol
+import Ordinal
+import Storage
+import Tagged
 
 @_documentation(visibility: public)
 @frozen
