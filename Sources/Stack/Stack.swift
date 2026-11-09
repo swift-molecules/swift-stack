@@ -59,7 +59,10 @@ extension __Stack where S: ~Copyable, S: __StackColumnProtocol {
     @inlinable
     public var top: S.Element {
 
-        _read { yield column[slot(Int(clamping: count.underlying.rawValue) - 1)] }
+        _read {
+            precondition(!isEmpty)
+            yield column[slot(Int(clamping: count.underlying.rawValue) - 1)]
+        }
     }
 
     @inlinable

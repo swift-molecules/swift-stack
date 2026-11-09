@@ -52,3 +52,13 @@ extension `Stack.Bounded Tests`.Unit {
         #expect(overDrain == nil)
     }
 }
+
+extension `Stack.Bounded Tests`.`Edge Case` {
+    @Test
+    func `top on an empty bounded stack stops at its precondition`() async {
+        await #expect(processExitsWith: .failure) {
+            let s = Stack<Int>.Bounded(capacity: Tagged<Int, Cardinal>(2 as UInt))
+            _ = s.top
+        }
+    }
+}

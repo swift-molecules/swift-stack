@@ -109,3 +109,13 @@ extension `Stack Tests`.Unit {
         }
     }
 }
+
+extension `Stack Tests`.`Edge Case` {
+    @Test
+    func `top on an empty stack stops at its precondition`() async {
+        await #expect(processExitsWith: .failure) {
+            let s = Stack<Int>()
+            _ = s.top
+        }
+    }
+}
